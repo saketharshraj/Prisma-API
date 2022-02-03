@@ -29,6 +29,14 @@ app.post("/create-users", async(req:Request, res:Response) => {
   res.json(users);
 })
 
+app.post("/create-cars", async(req:Request, res:Response) => {
+  const { carList } = req.body;
+  const cars = await prisma.car.createMany({
+    data: carList,
+  });
+  res.json(cars);
+})
+
 app.get("/", async(req:Request, res:Response) => {
   const users = await prisma.user.findMany();
   res.json(users);
